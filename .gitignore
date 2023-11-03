@@ -1,0 +1,5 @@
+p3.9_vgg16_2/
+.vscode/
+__pycache__/
+train/
+test/
