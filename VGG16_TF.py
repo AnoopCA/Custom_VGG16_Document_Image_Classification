@@ -50,12 +50,18 @@ class VGG16Model:
         return model
 
     def train(self, train_dir, test_dir, epochs=1, steps_per_epoch=1824, validation_steps=10):
-        trdata = ImageDataGenerator()
+        trdata = ImageDataGenerator(
+            rescale=1./255,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True
+        )
         traindata = trdata.flow_from_directory(directory=train_dir, target_size=(1000, 754), batch_size=1)
-        tsdata = ImageDataGenerator()
+        tsdata = ImageDataGenerator(rescale=1./255)
         testdata = tsdata.flow_from_directory(directory=test_dir, target_size=(1000, 754), batch_size=1)
 
-        hist = self.model.fit_generator(steps_per_epoch=steps_per_epoch, generator=traindata, validation_data=testdata, validation_steps=validation_steps, epochs=epochs)
+        hist = self.model.fit_generator(steps_per_epoch=steps_per_epoch, generator=traindata, validation_data=testdata, 
+                                        validation_steps=validation_steps, epochs=epochs)
 
         return hist
 
