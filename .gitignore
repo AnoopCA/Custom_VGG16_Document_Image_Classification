@@ -1,7 +1,8 @@
-p3.9_vgg16_2/
-p3.9_torch_6/
 .vscode/
-__pycache__/
-train/
-test/
 Archives/
+p3.9_torch_6/
+p3.9_vgg16_2/
+test/
+train/
+__pycache__/
+.idea/
