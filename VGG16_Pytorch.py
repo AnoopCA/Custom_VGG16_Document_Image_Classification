@@ -55,6 +55,7 @@ class VGG16(nn.Module):
         )
         
         self.classifier = nn.Sequential(
+            #We have 5 maxpool layers in the above neural network architecture which reduces the 224*224 image to 7*7 image
             nn.Linear(in_features=512 * 7 * 7, out_features=4096),
             nn.ReLU(inplace=True),
             nn.Dropout(),
