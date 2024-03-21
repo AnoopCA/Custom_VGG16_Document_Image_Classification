@@ -6,3 +6,5 @@ test/
 train/
 __pycache__/
 .idea/
+features
+labels
