@@ -22,8 +22,7 @@ class VGG16(nn.Module):
             if x == 'M':
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
-                layers += [nn.Conv2d(in_channels, x, kernel_size=3, padding=1),
-                           nn.ReLU(inplace=True)]
+                layers += [nn.Conv2d(in_channels, x, kernel_size=3, padding=1), nn.ReLU(inplace=True)]
                 in_channels = x
         layers += [nn.AvgPool2d(kernel_size=1, stride=1)]
         return nn.Sequential(*layers)
@@ -33,8 +32,7 @@ class VGG16(nn.Module):
         in_features = 512 * 7 * 7
         out_features = [4096, 4096, num_classes]
         for out_feat in out_features:
-            layers += [nn.Linear(in_features, out_feat),
-                       nn.ReLU(inplace=True)]
+            layers += [nn.Linear(in_features, out_feat), nn.ReLU(inplace=True)]
             if out_feat != num_classes:
                 layers += [nn.Dropout()]
             in_features = out_feat
@@ -42,6 +40,7 @@ class VGG16(nn.Module):
 
     def forward(self, x):
         x = self.features(x)
+        x = x.view(x.size(0), -1)
         x = self.classifier(x)
         return x
 
